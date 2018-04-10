@@ -63,48 +63,48 @@ func getCmp() string {
 }
 
 func runOcAdmin(cmd string) string {
-	runCmd("oc login -u system:admin > /dev/null")
+	// runCmd("oc login -u system:admin > /dev/null")
 	cmdOut := runCmd(cmd)
-	runCmd("oc login -u developer > /dev/null")
+	// runCmd("oc login -u developer > /dev/null")
 
 	return cmdOut
 }
 
-func pingSvc(url string) {
-	var ep bool = false
-	pingTimeout := time.After(5 * time.Minute)
-	tick := time.Tick(time.Second)
+// func pingSvc(url string) {
+// 	var ep bool = false
+// 	pingTimeout := time.After(5 * time.Minute)
+// 	tick := time.Tick(time.Second)
 
-	for {
-		select {
-		case <-pingTimeout:
-			Fail("could not ping the specific service in given time: 10 minutes")
+// 	for {
+// 		select {
+// 		case <-pingTimeout:
+// 			Fail("could not ping the specific service in given time: 10 minutes")
 
-		case <-tick:
-			httpTimeout := time.Duration(10 * time.Second)
-			client := http.Client{
-				Timeout: httpTimeout,
-			}
+// 		case <-tick:
+// 			httpTimeout := time.Duration(10 * time.Second)
+// 			client := http.Client{
+// 				Timeout: httpTimeout,
+// 			}
 
-			response, err := client.Get(url)
-			if err != nil {
-				time.Sleep(1 * time.Second)
-				continue
-			}
+// 			response, err := client.Get(url)
+// 			if err != nil {
+// 				time.Sleep(1 * time.Second)
+// 				continue
+// 			}
 
-			if response.Status == "200 OK" {
-				ep = true
+// 			if response.Status == "200 OK" {
+// 				ep = true
 
-			} else {
-				Fail("for service")
-			}
-		}
+// 			} else {
+// 				Fail("for service")
+// 			}
+// 		}
 
-		if ep {
-			break
-		}
-	}
-}
+// 		if ep {
+// 			break
+// 		}
+// 	}
+// }
 
 func TestOCdev(t *testing.T) {
 	RegisterFailHandler(Fail)
@@ -196,7 +196,7 @@ var _ = Describe("Usecase #5", func() {
 			getIP := runCmd("oc get svc nodejs -o go-template='{{.spec.clusterIP}}:{{(index .spec.ports 0).port}}'")
 			pingUrl := fmt.Sprintf("http://%s", getIP)
 
-			pingSvc(pingUrl)
+			//pingSvc(pingUrl)
 			grepBeforePush := runCmd("curl -s " + pingUrl +
 				" | grep 'Welcome to your Node.js application on OpenShift'")
 

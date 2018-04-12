@@ -42,7 +42,6 @@ jobs:
         - oc login -u developer 
         - make test-e2e
 
-
     # test installation script on linux
     - stage: test
       services:

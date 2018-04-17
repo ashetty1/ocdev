@@ -73,7 +73,7 @@ func pingSvc(url string) {
 	}
 }
 
-func pingCmd(cmd string) bool {
+func pingCmd(cmd string, expOut string) bool {
 	pingTimeout := time.After(5 * time.Minute)
 	tick := time.Tick(time.Second)
 
@@ -88,9 +88,13 @@ func pingCmd(cmd string) bool {
 				Fail(err.Error())
 			}
 
-			outInt, _ := strconv.Atoi(string(out))
-			if outInt > 0 {
-				return true
+			// outInt, _ := strconv.Atoi(string(out))
+			// if outInt > 0 {
+			// 	return true
+			// }
+
+			if string(out) == expOut {
+			   return true
 			}
 		}
 	}
@@ -240,7 +244,7 @@ var _ = Describe("odo", func() {
 				getRoute = strings.TrimSpace(getRoute)
 				Expect(getRoute).To(ContainSubstring("nodejs-" + projName))
 
-				curlRoute := pingCmd("curl -s " + getRoute + " | grep -i odo | wc -l | tr -d '\n'")
+				curlRoute := pingCmd("curl -s " + getRoute + " | grep -i odo | wc -l | tr -d '\n'","1")
 				if curlRoute {
 					grepAfterPush := runCmd("curl -s " + getRoute + " | grep -i odo")
 					log.Printf("After change: %s", strings.TrimSpace(grepAfterPush))

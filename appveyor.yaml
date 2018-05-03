@@ -1,6 +1,6 @@
 version: "{build}"
 
-# Source Config sw
+# Source Config sww
 clone_folder: C:\gopath\src\github.com\redhat-developer\odo
 shallow_clone: true
 

@@ -1,7 +1,7 @@
 version: "{build}"
 
 # Source Config
-clone_folder: c:\gopath\src\github.com\redhat-developer\odo
+clone_folder: C:\gopath\src\github.com\redhat-developer\odo
 shallow_clone: true
 
 # Build host

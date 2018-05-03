@@ -1,0 +1,12 @@
+version: "{build}"
+
+# Source Config
+clone_folder: c:\gopath\src\github.com\redhat-developer\odo
+
+# Build host
+environment:
+  GOPATH: c:\gopath
+  GOVERSION: 1.9
+ 
+test_script:
+- make test

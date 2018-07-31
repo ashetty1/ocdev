@@ -52,6 +52,10 @@ git push -f origin myfeature
 
 **Pull request description:** A PR should contain an accurate description of the feature being implemented as well as a link to an active issue (if any).
 
+### Test Driven Development
+
+We are trying to evolve a Test Driven Development(TDD) process in our development workflow. You read more about it [here](/docs/tdd-workflow.md)
+
 ## Dependency Management
 
 odo uses `glide` to manage dependencies.

@@ -1,0 +1,35 @@
+version: 1.0.0.{build}
+
+image: Visual Studio 2017
+
+init:
+  - git config --global core.autocrlf input
+  - git config --system core.longpaths true
+
+clone_folder: c:\gopath\src\github.com\redhat-developer\odo
+
+environment:
+  GOPATH: c:\gopath
+  GOVERSION: 1.10.1
+
+branches:
+  only:
+    - appveyor
+
+install:
+  - mkdir c:\tmp
+  - set TMP=C:\tmp
+  - go version
+  - set PATH=%GOPATH%\bin;c:\go\bin;%PATH%
+  - rmdir c:\go /s /q
+  - git config --system core.longpaths true
+  - go version
+  - go env
+
+before_test:
+  - go vet ./...
+
+test_script:
+  - go test ./...
+
+

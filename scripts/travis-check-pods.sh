@@ -2,10 +2,14 @@
 
 # Code from https://github.com/radanalyticsio/oshinko-cli/blob/master/travis-check-pods.sh
 
-oc login -u system:admin
-oc project default
+#oc login -u system:admin
+#oc project default
+
+#oc get dc
+#oc get pod
 
 while true; do
+    oc cluster status
     V=$(oc get dc docker-registry --template='{{index .status "latestVersion"}}')
     P=$(oc get pod docker-registry-$V-deploy --template='{{index .status "phase"}}')
     if [ "$?" -eq 0 ]; then

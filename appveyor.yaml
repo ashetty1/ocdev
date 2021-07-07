@@ -1,0 +1,19 @@
+version: "{build}"
+
+# Source Config sww
+clone_folder: C:\gopath\src\github.com\redhat-developer\odo
+shallow_clone: true
+
+# Build host
+environment:
+  GOPATH: c:\gopath
+  GOVERSION: 1.9
+  
+platform:
+  - x64
+  
+build_script:
+  - make bin
+  
+test_script:
+  - make test
